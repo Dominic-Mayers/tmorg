@@ -1,0 +1,11 @@
+public/mautic*/
+public/.well-known/
+symfony.lock
+var
+*.log
+**/.env
+**/.env.dev
+**/.env.test
+**/var/**
+*test.html
+public/readme_mautic.md

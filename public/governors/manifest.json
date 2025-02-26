@@ -1,0 +1,38 @@
+{
+	"name" : "Business Card for TM Teacher",
+	"short_name" : "TM Business Card",
+	"lang" : "en-US",
+	"start_url" : "/governors/business_card.php",
+	"display" : "standalone",
+	"background_color" : "white",
+	"theme_color" : "white",
+        "icons" : [
+		{
+			"src": "images/tm-128.png",
+			"sizes": "120x120"
+		},
+		{
+			"src": "images/tm-144.png",
+			"sizes": "144x144"
+		},
+		{
+			"src": "images/tm-152.png",
+			"sizes": "152x152"
+		},
+		{
+			"src": "images/tm-192.png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "images/tm-300.png",
+			"sizes": "300x300"
+		},
+		{
+			"src": "images/tm-1024.png",
+			"sizes": "1024x1024"
+		}    
+        ],
+	"screenshots" : [],
+	"orientation" : "landscape",
+	"generated" : ""
+}
