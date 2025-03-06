@@ -33,9 +33,6 @@ if ($lang=='en')
   //"dominic_mayers@yahoo.com";
   //"dominic@localhost";
   "shea@tm.org";
-  $email = empty($_POST['email']) && empty($_POST['update'])?
-           $admin_email :
-           $_POST['email'];
 }
 else
 {
@@ -50,13 +47,34 @@ else
   $logo_banner = "logo_fr";
   $subject_prefix = "Carte affaire";
   $admin_email =
-  //"dominic_mayers@yahoo.com";
-  //"dominic@localhost";
-  "dmayers@tm.org";
-  $email = empty($_POST['email']) && empty($_POST['update']) ?
-           $admin_email :
-           $_POST['email'];
+    "dominic";
+    //"dmayers@tm.org";
 }
+
+$note = ""; 
+if ( isset($_POST['update']) && ! empty($_POST['email']) ) {
+  // We keep the email, because it is only an update. 
+  $email = $_POST['email'];
+} elseif (! empty($_POST['email']) && $_POST['email'] !== $admin_email ) {
+  // We don't have to check the admin email
+  $email = $_POST['email']; 
+  $email_arr = explode("@", $email);
+  $email_name = $email_arr[0]; 
+  $email_domain = isset($email_arr[1]) ? $email_arr[1] : "empty";   
+  if ( $email_domain !== "tm.org" ) { 
+     $note = "The email must be in the tm.org domain.";
+     $email = $admin_email;
+  } elseif (! filter_var("$email_name@tm.org", FILTER_VALIDATE_EMAIL) ) {
+     $note = "The email must be valid.";
+     $email = $admin_email;
+  } else {
+     $email = "$email_name@tm.org";  
+  }
+} else {
+  // We use the admin email, if it is what it is or it is empty. 
+  $email = $admin_email; 
+}
+
 $city_prov = sanitize_text($city_prov_unsafe);
 $name =  sanitize_text($name_unsafe);
 $degree =  sanitize_text($degree_unsafe);
@@ -390,7 +408,7 @@ An empty line has <?php echo 100 * $FL;?>% a normal line height.  When 0.<?php e
 <!-- submit_info -->
 <div id="submit_info">
 <input type="submit" name="submit" value="Submit" />
-<span style="font-size:11pt;">Add your email below</span><br />
+<span style="font-size:11pt;">Add your tm.org email below.</span><br />
 <input type="text" name="email"  size="20" value="<?php echo $email;?>"/>
 <?php if(! empty($_POST['submit'])) 
 {
@@ -444,7 +462,7 @@ An empty line has <?php echo 100 * $FL;?>% a normal line height.  When 0.<?php e
   $to = $email ;
 
   mail($to,$subject,$msg,$headers,"-f $return_path");
-  echo "Thank you ! Data sent to $to.";
+  echo "<br>Thank you ! $note Data sent to $to.";
 }
 ?>
 </div>
@@ -550,10 +568,10 @@ function fullUpper($string){
 }
 
 function sanitize_textline($line) {
-   return preg_replace("/[^à-ü\p{L}\p{M}\p{Nd}\p{P}\p{Zs}\\. \\-]+/", "-", $line);
+   return preg_replace("/[^à-ü\p{L}\p{M}\p{Nd}\p{P}\p{Zs}]+/", "-", $line);
 }
 
 function sanitize_text($text) {
-   return preg_replace("/[^à-ü\p{L}\p{M}\p{Nd}\p{P}\p{Zs}\\. \\-\\r\\n]+/", "-", $text);
+   return preg_replace("/[^à-ü\p{L}\p{M}\p{Nd}\p{P}\p{Zs}\\r\\n]+/", "-", $text);
 }
 
