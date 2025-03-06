@@ -14,11 +14,11 @@ class BusinessCardController
         \ob_start(); 
         require("../governors/business_card.php"); 
         $resp = \ob_get_clean(); 
-        //return new Response($resp); 
-        return new Response("<html><body>Temporarily Out of Service.</body></html>"); 
+        return new Response($resp); 
+        //return new Response("<html><body>Temporarily Out of Service.</body></html>"); 
     }
 
-    //[Route('/businesscardtopdf')]
+    #[Route('/businesscardtopdf')]
     public function topdf(): Response
     {
         \ob_start(); 
