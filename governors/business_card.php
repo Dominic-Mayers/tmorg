@@ -365,7 +365,7 @@ case 'fr' :
 						<td class="pill_l">&nbsp;</td>
 						<td class="pill_m">
 							<div id="pillmenu">
-									<ul id="mainlevel-nav"><li><a href="http://ca.tm.org" >TEACHING</a></li><li><a href="http://ca.tm.org">TM MARKETING</a></li><li><a href="<?php if ($lang=="en") echo "business_card.php"; else echo "carte_affaire.php"; ?>" class="mainlevel-nav" id="active_menu-nav">OTHER TOOLS</a></li></ul>
+									<ul id="mainlevel-nav"><li><a href="http://ca.tm.org" >TEACHING</a></li><li><a href="http://ca.tm.org">TM MARKETING</a></li><li><a href="<?php if ($lang=="en") echo "businesscard"; else echo "carte_affaire"; ?>" class="mainlevel-nav" id="active_menu-nav">OTHER TOOLS</a></li></ul>
 							</div>
 						</td>
 						<td class="pill_r">&nbsp;</td>
