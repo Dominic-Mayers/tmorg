@@ -390,15 +390,9 @@ An empty line has <?php echo 100 * $FL;?>% a normal line height.  When 0.<?php e
 <!-- submit_info -->
 <div id="submit_info">
 <input type="submit" name="submit" value="Submit" />
-<span style="font-size:11pt;">Add your email(s), separated by commas, below</span><br />
+<span style="font-size:11pt;">Add your email below</span><br />
 <input type="text" name="email"  size="20" value="<?php echo $email;?>"/>
-<?php if(empty($_POST['submit'])) {
-?>
-<!--
-Enter emails separated by commas.
--->
-<?php }
-else
+<?php if(! empty($_POST['submit'])) 
 {
   $ch = curl_init();
   //$lang is set above and does not need to be sanitized;
