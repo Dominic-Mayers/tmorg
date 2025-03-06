@@ -30,8 +30,7 @@ if ($lang=='en')
   $logo_banner = "logo";
   $subject_prefix = "Business Card";
   $admin_email =
-  //"dominic_mayers@yahoo.com";
-  //"dominic@localhost";
+  //"dominic";
   "shea@tm.org";
 }
 else
@@ -47,8 +46,8 @@ else
   $logo_banner = "logo_fr";
   $subject_prefix = "Carte affaire";
   $admin_email =
-    "dominic";
-    //"dmayers@tm.org";
+    //"dominic";
+    "dmayers@tm.org";
 }
 
 $note = ""; 
