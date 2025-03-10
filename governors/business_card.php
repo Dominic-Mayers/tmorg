@@ -13,10 +13,14 @@
 <link href="https://tmorg.ca/governors/css_card/white_bg.css" rel="stylesheet" type="text/css" />
 <link href="https://tmorg.ca/governors/css_card/jcemediabox.css" rel="stylesheet" type="text/css" />
 <?php
-$lang = isset($_POST['lang'])? $_POST['lang']: false;
+if ( isset($_POST['lang']) ) {
+  // The default for garbage is 'en', but this script will not post garbage to itself. 
+  $lang = $_POST['lang'] == 'fr' ? 'fr': 'en';
+} else { 
+  $lang =  isset($_GET['fr']) ? 'fr': 'en';
+}
 $font_size_unsafe = isset($_POST['font_size'])? $_POST['font_size'] : "7.5"; // For degree
 $font_size = preg_match("/[^0-9.]/", $font_size_unsafe) ? "7.5" : $font_size_unsafe;
-if(!$lang) $lang =  isset($_GET['fr'])? 'fr': 'en';
 if ($lang=='en')
 {
   $city_prov_unsafe = isset($_POST['city_prov']) ? $_POST['city_prov'] : "Toronto, Ontario";
@@ -50,6 +54,9 @@ else
     "dmayers@tm.org";
 }
 
+//**************************************************************
+// Computing the email where to send the pdf
+//**************************************************************
 $note = ""; 
 if ( isset($_POST['update']) && ! empty($_POST['email']) ) {
   // We keep the email, because it is only an update. 
@@ -73,6 +80,9 @@ if ( isset($_POST['update']) && ! empty($_POST['email']) ) {
   // We use the admin email, if it is what it is or it is empty. 
   $email = $admin_email; 
 }
+//**************************************************************
+
+$req=strtok($_SERVER["REQUEST_URI"],'?');
 
 $city_prov = sanitize_text($city_prov_unsafe);
 $name =  sanitize_text($name_unsafe);
@@ -84,7 +94,6 @@ $subject =  "$subject_prefix $name";
 $tech_admin_email = "admin@tmorg.ca";
 $return_path = "admin@tmorg.ca";
 $from_email = "admin@tmorg.ca";
-$req=strtok($_SERVER["REQUEST_URI"],'?');
 
 // Measurements needed for style
 
@@ -410,28 +419,48 @@ An empty line has <?php echo 100 * $FL;?>% a normal line height.  When 0.<?php e
 <span style="font-size:11pt;">Put your tm.org email below.</span><br />
 <input type="text" name="email"  size="20" value="<?php echo $email;?>"/>
 <?php if(! empty($_POST['submit'])) 
+//**************************************************************
+// Requesting the pdf to businesscardtopdf
+//**************************************************************
 {
   $ch = curl_init();
   //$lang is set above and does not need to be sanitized;
   $url_upper_city_prov = urlencode(fullUpper($city_prov));
   $url_name = urlencode($name);
   $url_degree = urlencode($degree);
-  $url_name = urlencode($name);
+  $url_font_size = urlencode($font_size); // not really needed, but safer. 
   $url_title = urlencode($title);
   $url_info = urlencode($info);
+  //*********************************************
+  // Security should consider all the $ch
+  // possible by playing with the input  $lang, etc.
+  //*********************************************
   $base = basename($req);
   $new_req = str_replace($base, 'businesscardtopdf',$req);
-  curl_setopt($ch, CURLOPT_URL,"https://".$_SERVER['HTTP_HOST']. $new_req);
+  // Here, $_SERVER['HTTP_HOST'] is not safe.
+  curl_setopt($ch, CURLOPT_URL,"https://" . $_ENV['SERVER'] . $new_req);
   curl_setopt($ch, CURLOPT_POST, 1);
-  curl_setopt($ch, CURLOPT_POSTFIELDS,
-            "lang=$lang&city_prov=$url_upper_city_prov&name=$url_name&degree=$url_degree&font_size=$font_size&title=$url_title&info=$url_info");
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+  curl_setopt(
+  	$ch, 
+  	CURLOPT_POSTFIELDS,
+    "lang=$lang&".
+    "city_prov=$url_upper_city_prov&" .
+    "name=$url_name&" .
+    "degree=$url_degree&" .
+    "font_size=$url_font_size&" .
+    "title=$url_title&" .
+    "info=$url_info"
+  );
 
+  //*********************************************
   // receive server response ...
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
   $pdf_content = curl_exec ($ch);
   $error = curl_error($ch);
   curl_close ($ch);
+  //*********************************************
+  
+//**************************************************************
 
   $random_hash = md5(date('r', time()));
   $separator = "PHP-mixed-".$random_hash;
