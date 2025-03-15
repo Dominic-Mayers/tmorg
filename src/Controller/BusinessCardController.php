@@ -7,8 +7,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class BusinessCardController
 {
-    #[Route('/')]
-    #[Route('/businesscard')]
+    #[Route( path: '/businesscard', name: 'app_businesscard' )]
     public function show(): Response
     {
         \ob_start(); 
@@ -18,7 +17,7 @@ class BusinessCardController
         //return new Response("<html><body>Temporarily Out of Service.</body></html>"); 
     }
 
-    #[Route('/businesscardtopdf')]
+    #[Route(  path: '/businesscardtopdf', name: 'app_businesscardtopdf' )]
     public function topdf(): Response
     {
         \ob_start(); 
