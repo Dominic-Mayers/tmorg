@@ -415,7 +415,7 @@ An empty line has <?php echo 100 * $FL;?>% a normal line height.  When 0.<?php e
 <input type="text" name="email"  size="20" value="<?php echo $email;?>"/>
 <?php if(! empty($_POST['submit'])) 
 //**************************************************************
-// Requesting the pdf to businesscardtopdf
+// Requesting the pdf to pdfforbusinesscard
 //**************************************************************
 {
   $ch = curl_init();
@@ -431,7 +431,7 @@ An empty line has <?php echo 100 * $FL;?>% a normal line height.  When 0.<?php e
   // possible by playing with the input  $lang, etc.
   //*********************************************
 
-  $pdf_req = '/businesscardtopdf';
+  $pdf_req = '/pdfforbusinesscard';
   curl_setopt($ch, CURLOPT_URL,"https://" . $_ENV['SERVER'] . $pdf_req);
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  

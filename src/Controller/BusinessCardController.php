@@ -17,7 +17,7 @@ class BusinessCardController
         //return new Response("<html><body>Temporarily Out of Service.</body></html>"); 
     }
 
-    #[Route(  path: '/businesscardtopdf', name: 'app_businesscardtopdf' )]
+    #[Route(  path: '/pdfforbusinesscard', name: 'app_businesscardtopdf' )]
     public function topdf(): Response
     {
         \ob_start(); 
