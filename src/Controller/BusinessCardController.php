@@ -25,4 +25,11 @@ class BusinessCardController
         $resp = \ob_get_clean(); 
         return new Response($resp); 
     }
+
+    #[Route(  path: '/businesscard/test', name: 'app_businesscardtest' )]
+    public function totest(): Response
+    {
+        return new Response("<html><body>Ceci est un test.</body></html>");
+    }
+
 }
