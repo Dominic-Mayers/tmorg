@@ -163,6 +163,19 @@
   text-align: center;
 }
 
+label[for=username], label[for=password] {
+  display: inline-block; 
+  width: 4.75em;
+}
+
+input[type=password] {
+  margin-top: .25em; 
+}
+
+.btn {
+  margin-top: .25em; 
+}
+
 </style>
 {% endblock %}
 
@@ -264,6 +277,7 @@ www.tm.org</textarea><br />
 <!-- End Login Status -->
 
 <!-- Login from Symfony -->
+
 <form method="post" >
         <label for="username">Username</label>
         <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
@@ -271,6 +285,7 @@ www.tm.org</textarea><br />
         <label for="username">Email</label>
         <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
 -->
+        <br>
         <label for="password">Password</label>
         <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
 
@@ -287,7 +302,7 @@ www.tm.org</textarea><br />
                 <label for="_remember_me">Remember me</label>
             </div>
         #}
-
+        
         <button class="btn btn-lg btn-primary" type="submit">
             Sign in
         </button>
