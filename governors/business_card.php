@@ -328,6 +328,11 @@ $top = $bIpx - $ftIpx;
   font-size: 0px;
   line-height:<?php echo $hIpx/4;?>px;
 }
+
+#logout {
+ padding-left: 5px;
+ padding-top: 7px;
+}
 </style>
 </head>
 
@@ -502,6 +507,11 @@ else echo "images_card/Business_card_back.pdf"?>">
 </a>
 </div>
 <!-- End card_back -->
+<!-- Logout -->
+<div  id="logout">
+<a href="/logout" > Logout </a>
+</div>
+<!-- End Logout -->
 </div>
 <div id="card_wrapper">
  <div id="card">
