@@ -1,0 +1,348 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+<link rel="manifest" href="/governors/manifest.json">
+<link href="/css_card/general.css" rel="stylesheet" type="text/css" />
+<link href="/css_card/template.css" rel="stylesheet" type="text/css" />
+<link href="/css_card/white.css" rel="stylesheet" type="text/css" />
+<link href="/css_card/white_bg.css" rel="stylesheet" type="text/css" />
+ 
+<style>
+#wrapper {
+  width:1048.39px;
+  margin:auto;
+}
+
+
+#form_card_wrapper {
+  width: 1030.39px;
+  height: 448.01px;
+  margin: 0px 15px;
+  display: block;
+}
+
+#form_wrapper{
+  font-size:15px;
+  line-height: 18px;
+  float: left;
+  width: 262px;
+  padding:0px 10px 10px 10px;
+}
+
+#language_selector{
+  padding-top:50px;
+  padding-right: 50px;
+  font-size:18px;
+  float: right;
+}
+
+#infoInstruction{
+  line-height:12px;
+  font-size: 10px;
+  padding-bottom:3px;
+}
+
+#card_info{
+ padding-top: 0px;
+}
+
+#submit_info{
+ padding-top: 10px;
+}
+
+#card_back {
+ padding-left: 5px;
+ padding-top: 7px;
+}
+
+#card_back_icon {
+  float:left;
+  padding-left:10px;
+}
+
+#card_back_text {
+  width:150px;
+  float:left;
+}
+
+#card_wrapper {
+  text-align:center;
+  float: left;
+  background-color: #e1e1e1;
+  padding: 30px 30px 10px 30px;
+  width: 673.39px;
+}
+
+#card {
+  position:relative;
+  /* Because FPDF does not support kerning. The disabling of kerning is supported in Firefox and Chrome.*/
+  /* So, we have MÉDIT A TION TRANSCENDANT ALE ... */
+  /* TODO: Incorporate it in the background image. Kerning is more important with capitalized letters.*/
+  font-kerning: none;
+  background-image: url(/images_card/Carte_Affaire_MT_Pale_logo_no_text.jpg);
+  background-repeat:no-repeat;
+  height: 383.01px;
+  width: 673.39px;
+}
+
+.carditem {
+  position:absolute;
+  font-family:"Trebuchet MS";
+}
+
+#mt {
+  right: 37.55px;
+  top: 36.9398519275px;
+  font-size: 23.84419743px;
+  line-height: 23.84419743px;
+  color:#E59F0A;
+}
+
+#reg {
+  left: 635.84px;
+  top: 36.9398519275px;
+  font-size: 15.89613162px;
+  line-height: 15.89613162px;
+  color:#E59F0A;
+}
+
+#city {
+  right: 37.55px;
+  top: 66.9798519275px;
+  font-size: 23.84419743px;
+  line-height: 23.84419743px;
+  color:#E59F0A;
+}
+
+#name {
+  right: 37.55px;
+  top: 102.72015784px;
+  font-size: 26.4935527px;
+  line-height: 26.4935527px;
+  color:#0066a4;
+}
+
+#degree {
+  font-size:19.870164525px;
+}
+
+#title {
+  right: 37.55px;
+  top: 136.0718519275px;
+  font-size: 23.84419743px;
+  line-height: 23.84419743px;
+  color:#0066a4;
+  text-align:right;
+}
+
+#address {
+  right: 37.55px;
+  top: 183.01672741456px;
+  font-size: 21.19484216px;
+  line-height:28.718039756894px;
+  color:#0066a4;
+  text-align:right;
+}
+
+#address .empty {
+  font-size: 0px;
+  line-height:7.1795099392235px;
+}
+
+.alert {
+  font-size:24px;
+  line-height:30px; 
+  color: red; 
+  padding: 1em; 
+  margin: auto;
+  text-align: center;
+}
+
+.mb-3 {
+/* Login is required, etc */
+color: orange;
+font-weight: bold; 
+}
+
+label[for=username], label[for=password] {
+  display: inline-block; 
+  width: 4.75em;
+  color: green;
+}
+
+input[type=password] {
+  margin-top: .25em;
+}
+
+.btn {
+/* Signin button */
+  margin-top: .25em; 
+}
+
+</style>
+{% endblock %}
+
+{% block body %}
+<!-- Error message -->
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+<!-- End Error message -->
+
+
+<div id="wrapper">
+<div id="wrapper_r">
+<div id="header">
+	<div id="header_l">
+		<div id="header_r">
+			<div id="logo_fr"></div>
+			
+<!-- language_selector -->
+<div id="language_selector">
+<a href="businesscard" >English</a><br />
+</div>
+<!-- End language_selector -->
+
+		</div>
+
+	</div>
+</div>
+<div id="tabarea">
+	<div id="tabarea_l">
+		<div id="tabarea_r">
+			<div id="tabmenu">
+        <table cellpadding="0" cellspacing="0" class="pill">
+					<tbody><tr>
+						<td class="pill_l">&nbsp;</td>
+						<td class="pill_m">
+							<div id="pillmenu">
+									<ul id="mainlevel-nav"><li><a href="http://ca.tm.org" >TEACHING</a></li><li><a href="http://ca.tm.org">TM MARKETING</a></li><li><a href="carte_affaire" class="mainlevel-nav" id="active_menu-nav">OTHER TOOLS</a></li></ul>
+							</div>
+						</td>
+						<td class="pill_r">&nbsp;</td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="form_card_wrapper">
+<div id="form_wrapper">
+<!-- card_info -->
+<div id="card_info">
+<input type="hidden" name="lang" value="fr" />
+City and province : <br />
+<input type="text" name="city_prov"  size="20" value="Sherbrooke, Québec" readonly/><br />
+Name : <br />
+<input type="text" name="name"  size="20" value="Dominic Mayers" readonly/><br />
+Degree(s):<input type="text" name="degree"  size="3" value=", Ph.D." readonly/>Size:<select name="font_size"><option value="5.5" >5.5</option>
+<option value="6" >6</option>
+<option value="6.5" >6.5</option>
+<option value="7" >7</option>
+<option value="7.5" selected>7.5</option>
+<option value="8" >8</option>
+<option value="8.5" >8.5</option>
+<option value="9" >9</option>
+<option value="9.5" >9.5</option></select>
+<br />
+Title : <input type="text" name="title"  size="15" value="Professeur Certifié" readonly/><br />
+Address, phone, email, site :
+<div id="infoInstruction">
+An empty line has 25% a normal line height.  When 0.25 * #empty +  #normal &ge; 8, the line-height gets smaller.
+</div>
+<textarea name="info" cols="30" rows="6" readonly>831 rue McGregor
+Sherbrooke, QC, J1L 3B4
+514-664-3670
+819-340-0914
+dmayers@tm.org
+www.tm.org</textarea><br />
+<input type="submit" name="update" value="Update the preview on the right" />
+</div>
+<!-- End card_info -->
+
+<!-- Login Status -->
+    
+{% if app.user %}
+    <div style="margin:0.5em 0;" >
+    <div class="mb-3">
+        You are logged in as<br>
+        {{ app.user.userIdentifier }}.<br>
+        If needed, <a href="{{ path('app_logout') }}">Logout</a> or login differently:
+    </div>
+    </div>
+{% else %}
+<div style="margin:0.5em 0;" >
+<div class="mb-3">
+    Login is required !
+</div>
+</div>
+{% endif %}
+<!-- End Login Status -->
+
+<!-- Login from Symfony -->
+
+<form method="post" >
+        <label for="username">Username</label>
+        <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
+<!--
+        <label for="username">Email</label>
+        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+-->
+        <br>
+        <label for="password">Password</label>
+        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <input type="checkbox" name="_remember_me" id="_remember_me">
+                <label for="_remember_me">Remember me</label>
+            </div>
+        #}
+        
+        <button class="btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+</form>
+<!-- End Login from Symfony -->
+
+
+</div>
+<div id="card_wrapper">
+ <div id="card">
+  <span class="carditem" id="mt" >MÉDITATION TRANSCENDANTALE</span>
+  <span class="carditem" id="reg">&reg;</span>
+  <span class="carditem" id="city" >SHERBROOKE, QUÉBEC</span>
+  <div class="carditem" id="name" >
+   Dominic Mayers<span id="degree">, Ph.D.</span>
+  </div>
+  <span class="carditem" id="title" >Professeur Certifié</span>
+  <div class="carditem" id="address" >
+<span >831 rue McGregor<br /></span><span >Sherbrooke, QC, J1L 3B4<br /></span><span >514-664-3670<br /></span><span >819-340-0914<br /></span><span >dmayers@tm.org<br /></span><span >www.tm.org</span>  </div>
+ </div>
+<div style="padding-top:10px;">Your business card will look as the area within the gray border.  Real size is 8,89 x 5.08 cm </div>
+</div>
+</div>
+<div id="footer">
+	<div id="footer_l">
+
+		<div id="footer_r">
+	  </div>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+{% endblock %}
