@@ -10,7 +10,7 @@ class HomeController
     #[Route( path: '/', name: 'app_home' )]
     public function show(): RedirectResponse
     {
-       return new RedirectResponse('/login', 302);
+       return new RedirectResponse('/businesscard', 302);
     }
 
 }
